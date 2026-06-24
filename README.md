@@ -51,18 +51,18 @@ The prompts in this playbook are designed to be copied and pasted directly into 
 
 ## 🗂️ Table of Contents
 
-The playbook consists of 10 specialized chapters covering critical SEO and AEO tasks:
+The playbook consists of 10 specialized chapters covering critical SEO and AEO tasks. You can view or download each individual prompt directly from GitHub:
 
-1.  **Chapter 1: The Foundations of Answer Engine Optimization (AEO)** – Benchmarks factual density and extraction readiness.
-2.  **Chapter 2: Brand Context Mapping** – Turns company docs into a structured brand context map.
-3.  **Chapter 3: Entity-First Topical Authority Map** – Designs semantic cluster models to dominate target keywords.
-4.  **Chapter 4: Content Engineering for Retrieval (GEO)** – Re-engineers low-retrieval blogs into structured, high-value assets.
-5.  **Chapter 5: Technical SEO & Schema Auditing** – Reviews technical redirects, canonicals, and server logs.
-6.  **Chapter 6: Dynamic Schema Markup Builder** – Auto-generates validated, nested JSON-LD schema blocks.
-7.  **Chapter 7: Competitor Share-of-Voice Audit** – Audits brand mentions and citations inside AI outputs.
-8.  **Chapter 8: Title & Meta Snippet Optimizer** – Generates CTR-optimized title tags and metadata cards.
-9.  **Chapter 9: The Claude Project Workspace Setup** – Establishes the perfect workspace rules for Claude.
-10. **Chapter 10: Automated Google Search Console Reporter** – Translates GSC CSV performance exports into actionable plans.
+1.  **[Chapter 1: The Foundations of Answer Engine Optimization (AEO)](prompts/ch1_aeo_foundations.md)** – Benchmarks factual density and extraction readiness.
+2.  **[Chapter 2: Brand Context Mapping](prompts/ch2_brand_context_mapping.md)** – Turns company docs into a structured brand context map.
+3.  **[Chapter 3: Entity-First Topical Authority Map](prompts/ch3_topical_authority_map.md)** – Designs semantic cluster models to dominate target keywords.
+4.  **[Chapter 4: Content Engineering for Retrieval (GEO)](prompts/ch4_geo_content_engineering.md)** – Re-engineers low-retrieval blogs into structured, high-value assets.
+5.  **[Chapter 5: Technical SEO & Schema Auditing](prompts/ch5_technical_seo_audit.md)** – Reviews technical redirects, canonicals, and server logs.
+6.  **[Chapter 6: Dynamic Schema Markup Builder](prompts/ch6_json_ld_schema_builder.md)** – Auto-generates validated, nested JSON-LD schema blocks.
+7.  **[Chapter 7: Competitor Share-of-Voice Audit](prompts/ch7_competitor_share_of_voice.md)** – Audits brand mentions and citations inside AI outputs.
+8.  **[Chapter 8: Title & Meta Snippet Optimizer](prompts/ch8_title_meta_optimizer.md)** – Generates CTR-optimized title tags and metadata cards.
+9.  **[Chapter 9: The Claude Project Workspace Setup](prompts/ch9_claude_project_setup.md)** – Establishes the perfect workspace rules for Claude.
+10. **[Chapter 10: Automated Google Search Console Reporter](prompts/ch10_google_search_console_reporter.md)** – Translates GSC CSV performance exports into actionable plans.
 
 ---
 
