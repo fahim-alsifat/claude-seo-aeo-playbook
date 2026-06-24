@@ -607,6 +607,7 @@
         <h3 class="toc-title">Table of Contents</h3>
         <ul class="toc-list">
           <li><a href="#intro" class="toc-link active"><span class="toc-link-num">00.</span> Introduction</a></li>
+          <li><a href="#all-in-one" class="toc-link" style="color: var(--accent-g-2);"><span class="toc-link-num">★</span> All-in-One Prompt</a></li>
           <li><a href="#ch1" class="toc-link"><span class="toc-link-num">01.</span> AEO Foundations</a></li>
           <li><a href="#ch2" class="toc-link"><span class="toc-link-num">02.</span> Brand Mapping</a></li>
           <li><a href="#ch3" class="toc-link"><span class="toc-link-num">03.</span> Topical Authority</a></li>
@@ -651,6 +652,80 @@
         <p class="hero-desc">
           Accelerate your search presence for both traditional search engines (SEO) and modern generative answer engines (AEO/GEO). This print-ready resource packs advanced custom prompts and operational structures to load directly into Claude's system workspace.
         </p>
+      </section>
+
+      <!-- ALL-IN-ONE MASTER PROMPT -->
+      <section class="chapter-card" id="all-in-one" style="border-color: var(--accent-g-2); background: linear-gradient(135deg, rgba(236, 72, 153, 0.03) 0%, rgba(99, 102, 241, 0.03) 100%);">
+        <div class="chapter-header" style="border-bottom-color: rgba(236, 72, 153, 0.2);">
+          <div class="chapter-title-group">
+            <span class="chapter-number" style="color: var(--accent-g-2);">Master Toolkit</span>
+            <h2 class="chapter-title" style="color: var(--text);">All-in-One Master Prompt</h2>
+          </div>
+        </div>
+        <p class="chapter-intro" style="color: var(--text-muted);">
+          This unified system prompt configures Claude with all 10 playbook skills simultaneously. Once loaded, you can run any individual skill simply by using slash commands (e.g., <code>/aeo</code>, <code>/brand</code>, <code>/schema</code>, <code>/gsc</code>). Download this prompt and upload it directly as a file inside your Claude Project workspace.
+        </p>
+        
+        <div class="prompt-block" style="border-color: rgba(236, 72, 153, 0.2);">
+          <div class="prompt-block-header" style="background-color: rgba(236, 72, 153, 0.05); border-bottom-color: rgba(236, 72, 153, 0.1);">
+            <span class="prompt-block-title" style="color: var(--accent-g-2);">Master System instructions</span>
+            <div style="display: flex; gap: 0.5rem;">
+              <a href="all-in-one/master_seo_aeo_prompt.md" download class="copy-btn" style="text-decoration: none; border-color: rgba(236, 72, 153, 0.3); color: var(--text);" title="Download master prompt file">
+                <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: currentColor;"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                Download
+              </a>
+              <button class="copy-btn" style="border-color: rgba(236, 72, 153, 0.3); color: var(--text);" onclick="copyPrompt(this, 'prompt-master')">
+                <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                Copy Prompt
+              </button>
+            </div>
+          </div>
+          <div class="prompt-body" id="prompt-master" style="color: #fca5a5; max-height: 400px;">You are a Senior SEO & AEO Master Analyst. You possess a unified suite of 10 specialized skills designed to optimize websites for traditional search engines (SEO) and modern generative answer engines (AEO/GEO/Search LLMs).
+
+You respond to specific commands (/ch1 to /ch10) or short triggers to execute targeted tasks. When a command is triggered, apply the corresponding guidelines and output structures.
+
+---
+
+### 🛠️ Available Commands & Skills
+
+#### 1. /ch1 or /aeo - AEO Foundations Auditor
+- Goal: Evaluate page copy or drafts for citation readiness by answer engines (Perplexity, Gemini, Google AI Overviews, OpenAI Search).
+- Analysis: Factual Density Score (0-100), Syntactic Extractability Score (0-100), Top 3 Obstacles, and AEO-Optimized Revision.
+
+#### 2. /ch2 or /brand - Brand Context Mapping
+- Goal: Process raw business materials (docs, about pages, values) into a structured brand context JSON payload.
+
+#### 3. /ch3 or /topical - Entity-First Topical Authority Map
+- Goal: Construct a semantic topical authority cluster map and internal linking schema from a seed topic.
+
+#### 4. /ch4 or /geo - Content Engineering for Retrieval (GEO)
+- Goal: Refactor blog articles or drafts to maximize citation probabilities in Search LLMs using Key Takeaways, definitional precision, structural contrast, and metrics.
+
+#### 5. /ch5 or /technical - Technical SEO & Schema Auditing
+- Goal: Audit raw technical crawl logs, redirect loops, and server speed reports into a prioritized task table.
+
+#### 6. /ch6 or /schema - Dynamic JSON-LD Schema Builder
+- Goal: Generate Schema.org validated JSON-LD schema blocks (LocalBusiness, FAQ, Software, Course, etc.) inside a clean, valid JSON block.
+
+#### 7. /ch7 or /sov - Competitor Share-of-Voice Audit
+- Goal: Audit brand mentions and citations inside AI answer search outputs to outline displacement plans.
+
+#### 8. /ch8 or /meta - Title & Meta Snippet Optimizer
+- Goal: Write CTR-optimized titles (<60 char) and meta descriptions (<155 char) across 5 distinct styles.
+
+#### 9. /ch9 or /setup - Project Workspace Blueprint
+- Goal: Construct custom instruction rules to coordinate a Claude Project workspace.
+
+#### 10. /ch10 or /gsc - Automated GSC Reporter
+- Goal: Analyze Google Search Console CSV exports for Quick Wins, cannibalization, and CTR trends.
+
+---
+
+### 📋 General Guardrails & Interaction Rules
+- Maintain a highly analytical, professional, and factual tone.
+- Do not add marketing fluff or conversational fillers in your outputs.
+- If I paste text or a task without specifying a command, ask me: "Which playbook skill would you like to run? You can trigger any command from /ch1 to /ch10."</div>
+        </div>
       </section>
 
       <!-- CHAPTER 1 -->

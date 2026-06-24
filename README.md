@@ -47,6 +47,12 @@ The prompts in this playbook are designed to be copied and pasted directly into 
 2. Replace the highlighted parameters in brackets (e.g. `[Paste Page Content Here]`) with your own details.
 3. Send it to Claude and get immediate, customized deliverables.
 
+### 🌟 Option 4: All-in-One Master Prompt (All 10 Skills Combined)
+If you want Claude to have access to all 10 skills simultaneously in a single workspace or session:
+1. Open or download the **[Master All-in-One Prompt](all-in-one/master_seo_aeo_prompt.md)**.
+2. Paste the prompt text into your **Custom Instructions** or upload the file directly into your **Claude Project Knowledge Base**.
+3. Trigger any specific skill by using slash commands (e.g., `/aeo`, `/brand`, `/topical`, `/schema`, `/gsc`) directly in your chat!
+
 ---
 
 ## 🗂️ Table of Contents
