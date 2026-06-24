@@ -8,7 +8,7 @@ Welcome to the **Claude SEO & AEO Playbook** repository! This is a plug-and-play
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![Claude AI](https://img.shields.io/badge/Claude%203.5-D97706?style=for-the-badge&logo=anthropic&logoColor=white)](https://www.anthropic.com)
+[![Claude AI](https://img.shields.io/badge/Claude%204.8%20%2F%204.6-D97706?style=for-the-badge&logo=anthropic&logoColor=white)](https://www.anthropic.com)
 [![AEO & GEO](https://img.shields.io/badge/AEO%20%26%20GEO-Optimized-6366f1?style=for-the-badge)](https://github.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
