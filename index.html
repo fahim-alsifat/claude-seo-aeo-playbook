@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SEO & AEO Playbook with Claude - Advanced system skills and copy-paste prompts for AI and search optimization.">
+  <title>SEO & AEO Playbook with Claude - Master AI Search</title>
+  
+  <!-- Typography & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ── DESIGN SYSTEM & TOKENS ── */
+    :root {
+      --bg: #0b0f19;
+      --surface: #121826;
+      --surface-border: rgba(255, 255, 255, 0.06);
+      --surface-hover: rgba(255, 255, 255, 0.03);
+      --accent: #6366f1; /* Indigo */
+      --accent-g-1: #4f46e5;
+      --accent-g-2: #ec4899; /* Pink */
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --code-bg: #070a13;
+      --tag-bg: rgba(99, 102, 241, 0.15);
+      --tag-text: #818cf8;
+      
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.15);
+      
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-border: #e2e8f0;
+      --surface-hover: #f1f5f9;
+      --accent: #4f46e5;
+      --accent-g-1: #3b82f6;
+      --accent-g-2: #ec4899;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --code-bg: #f8fafc;
+      --tag-bg: rgba(79, 70, 229, 0.08);
+      --tag-text: #4f46e5;
+      --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.08);
+    }
+
+    /* ── BASE STYLES ── */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+      overflow-x: hidden;
+    }
+
+    /* ── SELECTION & SCROLLBAR ── */
+    ::selection {
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--surface-border);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
+    /* ── LAYOUT STRUCTURE ── */
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ── SIDEBAR (NAV) ── */
+    .sidebar {
+      width: 320px;
+      background-color: var(--surface);
+      border-right: 1px solid var(--surface-border);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      overflow-y: auto;
+      transition: transform 0.3s;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent-g-1), var(--accent-g-2));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .brand-logo svg {
+      width: 24px;
+      height: 24px;
+      fill: #ffffff;
+    }
+
+    .brand-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(to right, var(--accent-g-1), var(--accent-g-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .toc-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .toc-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      border-left: 3px solid transparent;
+    }
+
+    .toc-link:hover, .toc-link.active {
+      color: var(--text);
+      background-color: var(--surface-hover);
+      border-left-color: var(--accent);
+    }
+
+    .toc-link-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      opacity: 0.5;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main-content {
+      flex: 1;
+      margin-left: 320px;
+      padding: 2.5rem;
+      max-width: 1200px;
+      transition: margin-left 0.3s;
+    }
+
+    /* Header Nav controls */
+    .controls-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .btn-icon {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-icon:hover {
+      background-color: var(--surface-hover);
+      border-color: var(--accent);
+    }
+
+    /* Hero section */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      margin-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .badge-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.75rem;
+      border-radius: 50px;
+      background-color: var(--tag-bg);
+      color: var(--tag-text);
+    }
+
+    .badge.hot {
+      background-color: rgba(236, 72, 153, 0.15);
+      color: var(--accent-g-2);
+    }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent-g-1), var(--accent-g-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.125rem;
+      max-width: 800px;
+      margin-bottom: 2rem;
+    }
+
+    /* Chapter cards */
+    .chapter-card {
+      background-color: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      margin-bottom: 3.5rem;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .chapter-card:hover {
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+
+    .chapter-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-b: 1px solid var(--surface-border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .chapter-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .chapter-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--accent-g-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .chapter-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .chapter-intro {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Prompt block container */
+    .prompt-block {
+      background-color: var(--code-bg);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .prompt-block-header {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid var(--surface-border);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .prompt-block-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .copy-btn {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .copy-btn:hover {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    .copy-btn.copied {
+      background-color: #10b981;
+      color: #ffffff;
+      border-color: #10b981;
+    }
+
+    .copy-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .prompt-body {
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: #93c5fd;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .prompt-body span.var {
+      color: var(--accent-g-2);
+      font-weight: 600;
+      border-bottom: 1px dashed var(--accent-g-2);
+      padding: 0 2px;
+    }
+
+    .bullet-guide {
+      margin-top: 1.5rem;
+      padding-left: 1.25rem;
+      color: var(--text-muted);
+      font-size: 0.925rem;
+    }
+
+    .bullet-guide li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── MOBILE CONTROLS ── */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: linear-gradient(135deg, var(--accent-g-1), var(--accent-g-2));
+      border: none;
+      color: #ffffff;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .menu-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    /* ── TOAST NOTIFICATION ── */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background-color: var(--surface);
+      border: 1px solid var(--accent);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      color: var(--text);
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius-md);
+      z-index: 2000;
+      font-weight: 500;
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ── RESPONSIVE DESIGN ── */
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 1.5rem;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    /* ── PRINT-READY STYLES ── */
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-size: 12pt;
+      }
+
+      .sidebar,
+      .controls-header,
+      .copy-btn,
+      .menu-toggle,
+      .toast {
+        display: none !important;
+      }
+
+      .main-content {
+        margin-left: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+
+      .hero-banner {
+        background: transparent !important;
+        border: 1px solid #000 !important;
+        color: #000 !important;
+        padding: 2rem !important;
+        page-break-after: always;
+      }
+
+      .hero-title span {
+        -webkit-text-fill-color: initial !important;
+        background: none !important;
+        color: #000 !important;
+      }
+
+      .chapter-card {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin-bottom: 4rem !important;
+        page-break-after: always;
+      }
+
+      .prompt-block {
+        background: transparent !important;
+        border: 1px solid #000 !important;
+        page-break-inside: avoid;
+      }
+
+      .prompt-block-header {
+        background: transparent !important;
+        border-bottom: 1px solid #000 !important;
+        color: #000 !important;
+      }
+
+      .prompt-body {
+        background: transparent !important;
+        color: #000000 !important;
+        font-size: 10pt;
+        white-space: pre-wrap !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+      }
+      
+      .prompt-body span.var {
+        border-bottom: 1px solid #000 !important;
+        color: #000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- SIDEBAR / NAVIGATION -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-title">Claude Playbook</div>
+      </div>
+      
+      <nav>
+        <h3 class="toc-title">Table of Contents</h3>
+        <ul class="toc-list">
+          <li><a href="#intro" class="toc-link active"><span class="toc-link-num">00.</span> Introduction</a></li>
+          <li><a href="#ch1" class="toc-link"><span class="toc-link-num">01.</span> AEO Foundations</a></li>
+          <li><a href="#ch2" class="toc-link"><span class="toc-link-num">02.</span> Brand Mapping</a></li>
+          <li><a href="#ch3" class="toc-link"><span class="toc-link-num">03.</span> Topical Authority</a></li>
+          <li><a href="#ch4" class="toc-link"><span class="toc-link-num">04.</span> Citation Writing</a></li>
+          <li><a href="#ch5" class="toc-link"><span class="toc-link-num">05.</span> Technical Auditing</a></li>
+          <li><a href="#ch6" class="toc-link"><span class="toc-link-num">06.</span> Schema Generation</a></li>
+          <li><a href="#ch7" class="toc-link"><span class="toc-link-num">07.</span> Share of Voice</a></li>
+          <li><a href="#ch8" class="toc-link"><span class="toc-link-num">08.</span> CTR Optimizer</a></li>
+          <li><a href="#ch9" class="toc-link"><span class="toc-link-num">09.</span> Projects Blueprint</a></li>
+          <li><a href="#ch10" class="toc-link"><span class="toc-link-num">10.</span> Dashboard Analyst</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- MAIN BODY -->
+    <main class="main-content">
+      
+      <!-- CONTROLS HEADER -->
+      <header class="controls-header">
+        <button class="btn-icon" id="theme-btn" title="Toggle Theme" aria-label="Toggle Light and Dark Mode">
+          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+        <button class="btn-icon" onclick="window.print()" title="Print/Save as PDF" aria-label="Print Document">
+          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+            <path d="M6 14h12v8H6z"/>
+          </svg>
+        </button>
+      </header>
+
+      <!-- HERO BANNER -->
+      <section class="hero-banner" id="intro">
+        <div class="badge-wrap">
+          <span class="badge">AEO & SEO</span>
+          <span class="badge">Claude Skills</span>
+          <span class="badge hot">v1.1 Master Resource</span>
+        </div>
+        <h1 class="hero-title">SEO & AEO Playbook<br><span>with Claude</span></h1>
+        <p class="hero-desc">
+          Accelerate your search presence for both traditional search engines (SEO) and modern generative answer engines (AEO/GEO). This print-ready resource packs advanced custom prompts and operational structures to load directly into Claude's system workspace.
+        </p>
+      </section>
+
+      <!-- CHAPTER 1 -->
+      <article class="chapter-card" id="ch1">
+        <div class="chapter-header">
+          <div class="chapter-title-group">
+            <span class="chapter-number">Chapter 01</span>
+            <h2 class="chapter-title">The Foundations of Answer Engine Optimization (AEO)</h2>
+          </div>
+        </div>
+        <p class="chapter-intro">
+          Generative Answer Engines evaluate brand citations, entity authority, and context retrieval scores rather than simple keyword densities. This system prompt sets Claude up as an expert Auditor to benchmark content against LLM extraction mechanisms.
+        </p>
+        
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-title">AEO System Prompt</span>
+            <button class="copy-btn" onclick="copyPrompt(this, 'prompt-ch1')">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              Copy Prompt
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ch1">You are a Senior Answer Engine Optimization (AEO) Auditor specializing in retrieval engine rankings (Perplexity, Google AI Overviews, Gemini, OpenAI Search).
+
+Your goal is to analyze the provided page copy and evaluate its citation readiness based on three primary pillars:
+1. FACTUAL DENSITY: Count total factual assertions vs. generic marketing fluff. Calculate the density ratio.
+2. SYNTACTIC EXTRACTABILITY: Are facts presented in concise, direct subject-predicate-object schemas that LLM parsing models favor?
+3. COHERENCE & CITATION TRIGGERS: Does the document define terms clearly using natural NLP-friendly triggers (e.g., "[Entity] is a type of...", "Specifically, we solve...")?
+
+Provide your audit in the following format:
+- Factual Density Score (0-100)
+- Extractability Score (0-100)
+- Top 3 obstacles preventing an AI from citing this text as an authoritative source
+- A fully revised, AEO-optimized version of the content that preserves all core meaning but optimizes it for LLM retrieval and semantic citation.
+
+Here is the source content to audit:
+<span class="var">[Paste Page Content Here]</span></div>
+        </div>
+        
+        <ul class="bullet-guide">
+          <li><strong>Goal:</strong> Optimize readability and factual patterns for machine retrieval.</li>
+          <li><strong>Input:</strong> Put the raw web page copy or blog draft into the variable bracket.</li>
+        </ul>
+      </article>
+
+      <!-- CHAPTER 2 -->
+      <article class="chapter-card" id="ch2">
+        <div class="chapter-header">
+          <div class="chapter-title-group">
+            <span class="chapter-number">Chapter 02</span>
+            <h2 class="chapter-title">Brand Context Mapping for Claude Projects</h2>
+          </div>
+        </div>
+        <p class="chapter-intro">
+          Prevent generic AI responses by establishing a comprehensive brand identity, voice parameters, and specific audience maps. This prompt converts raw corporate material into a structured brand context JSON payload.
+        </p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-title">Brand Context Prompt</span>
+            <button class="copy-btn" onclick="copyPrompt(this, 'prompt-ch2')">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              Copy Prompt
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ch2">You are an expert Brand Strategist and Knowledge Architect. 
+
+I will provide raw materials about my business (about page text, pricing pages, customer reviews). Your task is to process this material and output a structured Brand Identity & Context Map formatted as a clean, structured JSON object to be loaded directly into my Claude Project files.
+
+The output JSON must contain precisely these root keys:
+{
+  "brandName": "<span class="var">[Name]</span>",
+  "industryClassification": "<span class="var">[Industry]</span>",
+  "uniqueSellingProposition": "<span class="var">[USP]</span>",
+  "targetAudienceProfile": {
+    "primaryICP": "...",
+    "keyPainPoints": []
+  },
+  "brandVoiceGuidelines": {
+    "toneWheel": ["e.g., Empathetic", "Direct"],
+    "restrictedJargon": [],
+    "sampleSentencesBeforeAfter": []
+  },
+  "productEcosystem": [
+    {"name": "...", "price": "...", "targetSolution": "..."}
+  ]
+}
+
+Ensure the analysis has zero fluff and is highly detailed. Here is the raw information:
+<span class="var">[Insert Company Docs & Web Text Here]</span></div>
+        </div>
+      </article>
+
+      <!-- CHAPTER 3 -->
+      <article class="chapter-card" id="ch3">
+        <div class="chapter-header">
+          <div class="chapter-title-group">
+            <span class="chapter-number">Chapter 03</span>
+            <h2 class="chapter-title">Entity-First Topical Authority Map</h2>
+          </div>
+        </div>
+        <p class="chapter-intro">
+          Search engines evaluate topical authority by mapping your content to known knowledge entities. This prompt directs Claude to build a topical map that establishes logical entity relationships.
+        </p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-title">Topical Map Prompt</span>
+            <button class="copy-btn" onclick="copyPrompt(this, 'prompt-ch3')">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              Copy Prompt
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ch3">Act as a Semantic Search Specialist and Database Architect.
+
+Given a seed topic, construct a comprehensive Topical Authority map. Your map must outline the hierarchical structure of entities, attributes, and search nodes necessary to prove to search engines that our site is a complete domain authority.
+
+Structure your output into a Markdown outline:
+1. CORE SEED ENTITY: <span class="var">[Enter Seed Topic]</span>
+2. PILLAR TOPICS (Level 1 sub-entities, need 4-5 major categories)
+3. CLUSTER NODES (Level 2 sub-topics under each pillar, mapping specific long-tail queries)
+4. LSI & SEMANTICALLY RELATED KEYWORDS (Contextual vocabulary to sprinkle throughout the content structure)
+5. INTERNAL LINKING ARCHITECTURE: Create a detailed map showing exactly how the Level 2 clusters should link back to parent pillars and each other to maximize PageRank distribution.
+
+Avoid creating generic lists. Every sub-topic must target a distinct user intent (e.g. Informational, Commercial, Transactional).</div>
+        </div>
+      </article>
+
+      <!-- CHAPTER 4 -->
+      <article class="chapter-card" id="ch4">
+        <div class="chapter-header">
+          <div class="chapter-title-group">
+            <span class="chapter-number">Chapter 04</span>
+            <h2 class="chapter-title">Content Engineering for Retrieval (GEO Framework)</h2>
+          </div>
+        </div>
+        <p class="chapter-intro">
+          Generative Engine Optimization (GEO) requires formatting content with concise key terms, lists, tables, and statistics. Use this prompt to transform low-retrieval blogs into high-performing resources.
+        </p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-title">GEO Content Prompt</span>
+            <button class="copy-btn" onclick="copyPrompt(this, 'prompt-ch4')">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              Copy Prompt
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ch4">You are an Elite GEO (Generative Engine Optimization) Copywriter.
+
+I will paste a blog article draft. Refactor this article to maximize its citation probabilities in LLM query completions.
+
+Use the following formatting and optimization guidelines:
+1. THE LLM EXECUTIVE SUMMARY: Prepend a 3-bullet-point "Key Takeaways" box at the top, summarizing core facts, numbers, and conclusions.
+2. DEFINITIONAL PRECISION: Rephrase critical concepts into high-clarity sentences (e.g., "[Concept] is defined as [Definition] because of [Data/Attribute]").
+3. STRUCTURAL CONTRAST: Convert long paragraphs explaining steps or options into a comparison Markdown Table or a structured bulleted list.
+4. AUTHORITATIVE METRICS: Ensure assertions contain specific metrics, dates, or calculations where applicable.
+
+Avoid changing the core message or adding generic filler. Output the fully engineered copy:
+<span class="var">[Paste Draft Content Here]</span></div>
+        </div>
+      </article>
+
+      <!-- CHAPTER 5 -->
+      <article class="chapter-card" id="ch5">
+        <div class="chapter-header">
+          <div class="chapter-title-group">
+            <span class="chapter-number">Chapter 05</span>
+            <h2 class="chapter-title">Technical SEO & Schema Auditing</h2>
+          </div>
+        </div>
+        <p class="chapter-intro">
+          Analyze technical crawl reports, redirect anomalies, page speed limits, and semantic markup errors to keep websites healthy and easy for crawl engines to read.
+        </p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-title">Technical Audit Prompt</span>
+            <button class="copy-btn" onclick="copyPrompt(this, 'prompt-ch5')">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              Copy Prompt
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ch5">Act as a Technical SEO Engineer. 
+
+Review the raw technical crawl log / site metric report provided below. I need you to identify critical issues across:
+- Status Code errors (broken redirects, 404 loops, canonicalization failures)
+- Asset optimization issues (uncompressed assets, bloated script loading, DOM elements size)
+- Indexability blockers (robots.txt configs, missing main content elements, heading depth order)
+
+Present your audit in a prioritized table:
+| Severity (Critical/Medium/Low) | Issue Description | Diagnostic Data | Step-by-Step Fix Instructions |
+
+Raw Diagnostic/Crawl Log:
+<span class="var">[Insert Diagnostic Data / Crawl Log / Screaming Frog CSV Here]</span></div>
+        </div>
+      </article>
+
+      <!-- CHAPTER 6 -->
+      <article class="chapter-card" id="ch6">
+        <div class="chapter-header">
+          <div class="chapter-title-group">
+            <span class="chapter-number">Chapter 06</span>
+            <h2 class="chapter-title">Dynamic JSON-LD Schema Markup Builder</h2>
+          </div>
+        </div>
+        <p class="chapter-intro">
+          Structured data helps search engines catalog your pages in rich snippets. This prompt uses Claude to build clean, nesting JSON-LD structures ready for verification.
+        </p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-title">Schema Generator Prompt</span>
+            <button class="copy-btn" onclick="copyPrompt(this, 'prompt-ch6')">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              Copy Prompt
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ch6">You are a Senior structured Data Specialist.
+
+Generate a validated JSON-LD schema markup optimized for Google Rich Results.
+
+SCHEMA TYPE: <span class="var">[Choose: LocalBusiness / FAQPage / Article / SoftwareApplication / Course]</span>
+CONTEXT DATA:
+<span class="var">[Provide raw facts: company name, product details, FAQ questions and answers, URLs, pricing info]</span>
+
+Requirements:
+- Structure must strictly validate against Schema.org criteria
+- Link entities properly using nesting fields (e.g., nest Publisher inside Article, offer details inside SoftwareApplication)
+- Include all recommended attributes, not just required ones
+- Output only valid, parseable JSON code inside a single code block. Do not include markdown wraps or explanations.</div>
+        </div>
+      </article>
+
+      <!-- CHAPTER 7 -->
+      <article class="chapter-card" id="ch7">
+        <div class="chapter-header">
+          <div class="chapter-title-group">
+            <span class="chapter-number">Chapter 07</span>
+            <h2 class="chapter-title">Competitor Share-of-Voice Audit in AI Engines</h2>
+          </div>
+        </div>
+        <p class="chapter-intro">
+          Measure how often your competitors are featured in AI answer engine outputs. This prompt evaluates competitor positioning and locates opportunities to displace them.
+        </p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-title">Share of Voice Prompt</span>
+            <button class="copy-btn" onclick="copyPrompt(this, 'prompt-ch7')">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              Copy Prompt
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ch7">Act as a Competitive Intelligence Specialist.
+
+I have extracted several AI answer search outputs generated by Perplexity/Gemini for target queries in our industry. I need you to run a citation audit and competitor analysis.
+
+INPUT DATA:
+<span class="var">[Paste AI search responses, including listed footnotes and citations]</span>
+
+Analyze:
+1. CITATION SHARE: Which brands are cited, and what is their percentage share of voice?
+2. VALUE ANGLE: What attributes or benefits did the AI focus on when citing those brands?
+3. RECONSTRUCTION PLAN: What specific angles, resources, or content structures must our brand create to displace these competitors in future query passes?
+
+Provide a detailed summary followed by an actionable execution checklist.</div>
+        </div>
+      </article>
+
+      <!-- CHAPTER 8 -->
+      <article class="chapter-card" id="ch8">
+        <div class="chapter-header">
+          <div class="chapter-title-group">
+            <span class="chapter-number">Chapter 08</span>
+            <h2 class="chapter-title">Title & Meta Snippet Optimizer</h2>
+          </div>
+        </div>
+        <p class="chapter-intro">
+          Optimize search result snippets to drive click-through rates. This prompt writes title tags and descriptions built to rank and capture clicks.
+        </p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-title">Snippet Refinement Prompt</span>
+            <button class="copy-btn" onclick="copyPrompt(this, 'prompt-ch8')">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              Copy Prompt
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ch8">You are a search CTR Optimization expert.
+
+Generate 5 variations of optimized Title Tags and Meta Descriptions for the following landing page:
+
+TARGET KEYWORD: <span class="var">[Primary Keyword]</span>
+PAGE DETAILS: <span class="var">[Enter product features / core offer / CTA]</span>
+
+Follow these constraints:
+- Title Tags: Must be under 60 characters, put the primary keyword early, and include a clear differentiator or hook.
+- Meta Descriptions: Must be under 155 characters, end with a strong call-to-action (CTA), and contain semantically related search terms naturally.
+- Tones: Provide options across 5 styles (Aggressive/Benefit-driven, Curiosity-driven, Question-style, Clean/Minimalist, Metric-focused).
+
+Format the output in a markdown table comparing lengths and angles.</div>
+        </div>
+      </article>
+
+      <!-- CHAPTER 9 -->
+      <article class="chapter-card" id="ch9">
+        <div class="chapter-header">
+          <div class="chapter-title-group">
+            <span class="chapter-number">Chapter 09</span>
+            <h2 class="chapter-title">The Claude Project Workspace Setup</h2>
+          </div>
+        </div>
+        <p class="chapter-intro">
+          Configure a robust workspace inside Claude Projects. This guide details how to organize reference files and design custom system instructions.
+        </p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-title">Project Setup Prompt</span>
+            <button class="copy-btn" onclick="copyPrompt(this, 'prompt-ch9')">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              Copy Prompt
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ch9">Act as a Workspace Architect.
+
+Construct a complete set of "Custom Instructions" to put into a new Claude Project workspace. The workspace will act as our team's AI SEO Coordinator.
+
+MARKETING GOALS: <span class="var">[E.g., Increase organic lead signups, build backlink opportunities, audit existing content]</span>
+REQUIRED OUTPUT FORMATS: <span class="var">[E.g., clean markdown briefs, JSON schemas, GSC analytical reports]</span>
+
+Your system instruction must include:
+1. Role definition & boundary limits (what the agent can and cannot assume)
+2. Core quality control checklist for auditing all generated texts
+3. Context reference commands (how the agent should query files uploaded in the Project Knowledge Base)
+4. Tonal style guardrails
+
+Present the final output inside a single markdown code block ready for copy-pasting.</div>
+        </div>
+      </article>
+
+      <!-- CHAPTER 10 -->
+      <article class="chapter-card" id="ch10">
+        <div class="chapter-header">
+          <div class="chapter-title-group">
+            <span class="chapter-number">Chapter 10</span>
+            <h2 class="chapter-title">Automated Google Search Console Reporter</h2>
+          </div>
+        </div>
+        <p class="chapter-intro">
+          Analyze raw performance CSV files to pinpoint ranking drops, track keyword cannibalization, and surface new organic search impressions.
+        </p>
+
+        <div class="prompt-block">
+          <div class="prompt-block-header">
+            <span class="prompt-block-title">Analytics Reporter Prompt</span>
+            <button class="copy-btn" onclick="copyPrompt(this, 'prompt-ch10')">
+              <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+              Copy Prompt
+            </button>
+          </div>
+          <div class="prompt-body" id="prompt-ch10">You are a Senior SEO & Growth Analyst.
+
+I am feeding you a comma-separated (CSV) search console performance query export. Your goal is to analyze the data and output a performance report.
+
+Perform the following calculations and analyses:
+1. QUICK-WIN IDENTIFICATION: Locate keywords ranking in positions 8-15 with click-through rates (CTR) below average, suggesting they need minor on-page optimization.
+2. CANNIBALIZATION AUDIT: Detect search queries mapping to multiple URLs with high impressions but low CTR.
+3. TREND REPORTING: Identify queries showing growing impressions but static click volume.
+
+Present the diagnostic results in a clear dashboard table, followed by a prioritized list of optimization tasks for the team.
+
+CSV Performance Data:
+<span class="var">[Paste CSV Content Here]</span></div>
+        </div>
+      </article>
+
+      <!-- FOOTER -->
+      <footer style="margin-top: 5rem; border-top: 1px solid var(--surface-border); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.875rem;">
+        <p>© 2026 SEO & AEO Playbook Repository. Print-ready layout. All rights reserved.</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Mobile Toggle Menu Button -->
+  <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast" id="toast">Prompt copied to clipboard!</div>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // Theme Toggle Functionality
+    const themeBtn = document.getElementById('theme-btn');
+    const htmlElement = document.documentElement;
+
+    // Load theme setting
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      htmlElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+      showToast(`Switched to ${newTheme} mode`);
+    });
+
+    function updateThemeIcon(theme) {
+      if (theme === 'light') {
+        themeBtn.innerHTML = `
+          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        `;
+      } else {
+        themeBtn.innerHTML = `
+          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        `;
+      }
+    }
+
+    // Mobile Navigation Sidebar Toggle
+    const menuToggleBtn = document.getElementById('menu-toggle');
+    const sidebarElement = document.getElementById('sidebar');
+
+    menuToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sidebarElement.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (sidebarElement.classList.contains('open') && !sidebarElement.contains(e.target) && e.target !== menuToggleBtn) {
+        sidebarElement.classList.remove('open');
+      }
+    });
+
+    // Copy to Clipboard Utility
+    function copyPrompt(button, textId) {
+      const textElement = document.getElementById(textId);
+      const textToCopy = textElement.innerText || textElement.textContent;
+      
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = button.innerHTML;
+        button.innerHTML = `
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Copied!
+        `;
+        button.classList.add('copied');
+        
+        showToast('Prompt copied to clipboard!');
+        
+        setTimeout(() => {
+          button.innerHTML = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+        showToast('Error copying prompt.');
+      });
+    }
+
+    // Custom Toast Alert
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // Active link highlighting on scroll
+    const sections = document.querySelectorAll('section, article');
+    const navLinks = document.querySelectorAll('.toc-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - 120)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
